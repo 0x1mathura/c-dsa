@@ -161,10 +161,7 @@ int main() {
 
     for (int epoch = 0; epoch < epochs; epoch++) {
 
-        // =================================
         // FORWARD PROPAGATION
-        // =================================
-
         // Hidden layer 1
         smat::Matrix<double> Z1 = X * W1;
 
@@ -189,9 +186,9 @@ int main() {
         smat::Matrix<double> A3 =
             sigmoidMatrix(Z3, samples, outputSize);
 
-        // =================================
+
         // LOSS CALCULATION
-        // =================================
+    
 
         smat::Matrix<double> E = A3 - Y;
 
@@ -203,10 +200,7 @@ int main() {
 
         loss /= (2.0 * samples);
 
-        // =================================
         // BACKPROPAGATION
-        // =================================
-
         // Output layer gradient
         smat::Matrix<double> dZ3 =
             sigmoidBackward(E, A3, samples, outputSize);
@@ -248,9 +242,6 @@ int main() {
         smat::Matrix<double> dB1 =
             biasGradient(dZ1, samples, hidden1);
 
-        // =================================
-        // PARAMETER UPDATES
-        // =================================
 
         W1 = W1 - learning_rate * dW1;
         B1 = B1 - learning_rate * dB1;
